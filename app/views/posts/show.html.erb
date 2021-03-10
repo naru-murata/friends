@@ -1,0 +1,18 @@
+<h1>id: <%= @post.id %> の投稿詳細ページ</h1>
+
+<table class="table table-bordered" >
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>コンテンツ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @post.id %></td>
+      <td><%= @micropost.content %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to '編集', edit_micropost_path(@micropost), method: :post, class: 'btn btn-primary'%>

@@ -1,0 +1,19 @@
+<% if current_user == @user %>
+
+ <h1><%= @user.name %> のユーザー情報</h1>
+
+
+    <%= form_for(@user) do |f| %>
+      <div class="form-group">
+        <%= f.label :name, 'Name'%>
+        <%= f.text_field :name,class: 'form-control', style: 'width: 200px; display:inline;'%>
+      </div>
+
+      <%= f.submit '更新', class: 'btn btn-success' %>
+    <% end %>
+    <br>
+  <%= link_to 'ユーザーに戻る', @user , class: 'btn btn-primary' %>
+  
+  <%= link_to '退会する', user_path(@user), method: :delete, data: {confirm: 'You sure?'}, class: 'btn btn-danger' %>
+  
+<% end %>

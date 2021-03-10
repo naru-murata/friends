@@ -1,0 +1,10 @@
+<h1>id: <%= @post.id %> の投稿編集ページ</h1>
+
+<%= form_for(@post) do |f| %>
+  <%= f.label :content, '投稿' %>
+  <%= f.text_field :content,class: 'form-control', style: 'width: 200px; display:inline;' %>
+
+  <%= f.submit '更新', class: 'btn btn-default' %>
+<% end %>
+<br>
+<%= link_to '一覧に戻る', root_url , class: 'btn btn-primary' %>
