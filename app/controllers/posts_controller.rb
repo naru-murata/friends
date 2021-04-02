@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     else
       @posts = current_user.feed_posts.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'メッセージの投稿に失敗しました。'
-      render 'toppages/index'
+      render 'posts/show'
     end
   end
 
@@ -37,12 +37,13 @@ class PostsController < ApplicationController
   end
   
   def show
+    @user = User.find(params[:user_id])
     @post = Post.find(params[:id])
   end
   
   private
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :pictures)
   end
   
   def correct_user

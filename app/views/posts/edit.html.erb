@@ -1,10 +1,16 @@
-<h1>id: <%= @post.id %> の投稿編集ページ</h1>
+<h1>投稿編集ページ</h1>
 
 <%= form_for(@post) do |f| %>
-  <%= f.label :content, '投稿' %>
-  <%= f.text_field :content,class: 'form-control', style: 'width: 200px; display:inline;' %>
-
-  <%= f.submit '更新', class: 'btn btn-default' %>
+  <div class="form_group">
+    <%= f.label :pictures, '画像アップロード' %>
+    <%= f.file_field :pictures %>
+  </div>
+  <div class="form_group">
+    <%= f.label :content, '本文' %>
+    <%= f.text_area :content, class: 'form-control', row:5 %>
+  </div>
+<br>
+<%= f.submit '更新', class: 'btn btn-success' %>
 <% end %>
 <br>
 <%= link_to '一覧に戻る', root_url , class: 'btn btn-primary' %>

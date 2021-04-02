@@ -2,32 +2,69 @@
   <div class="row">
     <aside class="col-sm-4">
       <%= form_with(model: @post, local: true) do |f| %>
-        <div class="form-group">
-          <%= f.text_area :content, class: 'form-control', rows: 5 %>
-        </div>
-        <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
-      <% end %>
+      <div class="form-group">
+        <%= f.label :pictures, '写真アップロード' %>
+        <%= f.file_field :pictures %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.text_area :content, class: 'form-control', rows: 5 %>
+      </div>
+      <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+    <% end %>
     </aside>
     <div class="col-sm-8">
       <%= render 'posts/posts', posts: @posts %>
     </div>
   </div>
 <% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to Friends!</h1>
-      <h3>Friendsとは?</h3>
-      <p>Friendsは友達作りの交流サイトです。<br>登録して趣味や性格が合う人と出会いましょう!</p>
-    </div>
-  </div>
+<div class="center jumbotron">
   <div class="text-center">
-    <h1><使い方></h1>
+    <h1>Welcome to Friends!</h1>
+    <h3>Friendsとは?</h3>
+    <p>Friendsは友達作りの交流サイトです。<br>登録して趣味や性格が合う人と出会いましょう!</p>
   </div>
-  <div class="container"></div>
-  <div class="center jumbotron">
-    <div class="text-center">
-        <h1>Friendsを始める?</h1>
-        <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+</div>
+<div class="text-center">
+  <h1><使い方></h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <%= image_tag '/user_view.png', :size => '569x312' %>
+    </div>
+    
+    <div class="col-sm-4 text-center">
+        投稿ボタンから写真や本文を入力して自分の活動を投稿でき他ユーザに共有しましょう!
+        <br>他ユーザをフォローするとタイムラインに表示されます。
+        <br>また気に入った投稿はお気に入りにしましょう。
     </div>
   </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-8">
+      <%= image_tag '/user-edit-view.png', :size  => '605x217' %>
+    </div>
+    
+    <div class="col-sm-4">
+      ユーザ詳細ページではプロフィール編集ができ、お気に入り登録した投稿、フォローしたユーザ、フォロワーの一覧が表示されます。
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-8">
+      <%= image_tag '/search-view.png', :size => '445x215' %>
+    </div>
+    
+    <div class="col-sm-4">
+      ユーザを検索し、気になった人をフォローして交流しましょう。
+    </div>
+  </div>
+</div>
+<div class="center jumbotron">
+  <div class="text-center">
+      <h1>Friendsを始める?</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+  </div>
+</div>
 <% end %>

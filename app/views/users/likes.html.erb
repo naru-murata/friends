@@ -1,7 +1,7 @@
 <div class="row">
   <aside class="col-sm-4">
     <div class="card">
-      <% if @user.icon? %>
+        <% if @user.icon? %>
           <%= image_tag @user.icon_url, size: 400 %>
         <% else %>
           <%= image_tag('/default.png') %>
@@ -27,6 +27,6 @@
       <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">Followings  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
       <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">Followers  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
     </ul>
-    <%= render 'users', users: @followings %>
+    <%= render 'posts/posts', posts: @likes %>
   </div>
 </div>

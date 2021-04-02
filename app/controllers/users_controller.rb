@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
   def index
-    @users = User.order(id: :desc).page(params[:page]).per(30)
+    if params[:name].present?
+      @users = User.where('name LIKE ?', "%#{params[:name]}%")
+    else
+      @users = User.order(id: :desc).page(params[:page])
+    end
   end
 
   def show
-    @user = User.find(params[:id])
+     @user = User.find(params[:id])
      @posts = @user.posts.order(id: :desc).page(params[:page])
     counts(@user)
   end
@@ -70,8 +74,19 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
-  private
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  def likes
+    @user = User.find(params[:id])
+    @likes = @user.likes.page(params[:page])
+    counts(@user)
   end
+  
+  private
+  def user_search_params
+    params.fetch(:search, {}).permit(:name)
+  end
+  
+  def user_params
+    params.require(:user).permit(:icon, :name, :email, :password, :password_confirmation, :content)
+  end
+  
 end

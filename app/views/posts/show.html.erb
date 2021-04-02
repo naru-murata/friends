@@ -1,18 +1,24 @@
-<h1>id: <%= @post.id %> の投稿詳細ページ</h1>
-
-<table class="table table-bordered" >
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>コンテンツ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @post.id %></td>
-      <td><%= @micropost.content %></td>
-    </tr>
-  </tbody>
-</table>
-
-<%= link_to '編集', edit_micropost_path(@micropost), method: :post, class: 'btn btn-primary'%>
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="card">
+        <% if @user.icon.file.nil? %>
+          <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 400 }) %>" alt="">
+        <% else %>
+          <%= image_tag @user.icon_url, size: 400 %>
+        <% end %>
+      <div class="card-body">
+        <h3 class="card-title text-center"><%= @user.name %></h3>
+        <div class="card-text"><%= @user.content %></div>
+      </div>
+    </div>
+    <div>
+      <% if current_user == @user %>
+      <%= link_to 'ユーザ編集', edit_user_path(@user), class: 'btn btn-primary btn-block'%>
+      <%= link_to '投稿', post_path(@user), class: 'btn btn-success btn-block' %>
+      <% end %>
+    </div>
+    <div>
+      <%= render 'relationships/follow_button', user: @user %>
+    </div>
+  </aside>
+</div>

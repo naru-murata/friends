@@ -2,7 +2,11 @@
   <ul class="list-unstyled">
     <% users.each do |user| %>
       <li class="media">
-        <img class="mr-2 rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+        <% if user.icon? %>
+          <%= image_tag user.icon_url, size: 50 %>
+        <% else %>
+          <%= image_tag('/default.png') %>
+        <% end %>
         <div class="media-body">
           <div>
             <%= user.name %>
@@ -14,5 +18,4 @@
       </li>
     <% end %>
   </ul>
-  <%= paginate users %>
 <% end %>
